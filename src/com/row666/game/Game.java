@@ -1,6 +1,11 @@
 package com.row666.game;
 
 import com.row666.game.display.Display;
+import com.row666.game.states.GameState;
+import com.row666.game.states.StateManager;
+
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Game {
     
@@ -10,6 +15,10 @@ public class Game {
     private String title;
     private int width, height;
     
+    private GameState gameState;
+    
+    private BufferStrategy bs;
+    private Graphics g;
     public Game(String title, int width, int height) {
         this.title = title;
         this.width = width;
@@ -17,6 +26,22 @@ public class Game {
     }
     
     private void render() {
+        bs = display.getCanvas().getBufferStrategy();
+        if(bs == null) {
+            display.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        g = bs.getDrawGraphics();
+        //clear
+        g.clearRect(0, 0, width, height);
+        //draw
+        
+        if(StateManager.getState() != null)
+            StateManager.getState().render(g);
+        
+        //end
+        bs.show();
+        g.dispose();
     }
     
     private void tick() {
@@ -24,6 +49,9 @@ public class Game {
     
     private void init() {
         display = new Display(title, width, height);
+        
+        gameState = new GameState(this);
+        StateManager.setState(gameState);
     }
     
     
@@ -80,4 +108,12 @@ public class Game {
         running = false;
     }
     
+    
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
 }
