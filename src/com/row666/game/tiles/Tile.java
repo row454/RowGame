@@ -18,7 +18,7 @@ public class Tile {
     public Tile(BufferedImage texture, int id, boolean solid) {
         this.texture = texture;
         this.id = id;
-        
+        this.solid = solid;
         TileManager.addTile(this);
     }
     

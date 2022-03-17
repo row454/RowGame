@@ -20,7 +20,11 @@ public class ConnectingTile extends Tile {
      *
      */
     public ConnectingTile(BufferedImage[] textures, int id) {
-        super(textures[0], id);
+        this(textures, id, false);
+
+    }
+    public ConnectingTile(BufferedImage[] textures, int id, boolean solid) {
+        super(textures[0], id, solid);
         if(textures.length != 5) {
             throw new IllegalArgumentException();
         }

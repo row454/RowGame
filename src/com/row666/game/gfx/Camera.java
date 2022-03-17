@@ -1,5 +1,6 @@
 package com.row666.game.gfx;
 
+import com.row666.game.entities.Entity;
 import com.row666.game.states.GameState;
 import com.row666.game.tiles.Tile;
 
@@ -13,13 +14,13 @@ public class Camera {
         this.xOffset = xOffset;
         this.yOffset = yOffset;
     }
-    /*
+
     public void centerOnEntity(Entity e) {
         xOffset = e.getX() - state.getGame().getWidth() / 2f + e.getWidth() / 2;
         yOffset = e.getY() - state.getGame().getHeight() / 2f + e.getWidth() / 2;
         checkBlankSpace();
     }
-    */
+
     public void move(float xAmt, float yAmt) {
         xOffset += xAmt;
         yOffset += yAmt;

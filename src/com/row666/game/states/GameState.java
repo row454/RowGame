@@ -2,7 +2,7 @@ package com.row666.game.states;
 
 import com.row666.game.Game;
 import com.row666.game.gfx.Camera;
-import com.row666.game.room.Room;
+import com.row666.game.floor.room.Room;
 
 import java.awt.*;
 
@@ -19,7 +19,7 @@ public class GameState extends State {
     
     @Override
     public void tick() {
-    
+        room.tick();
     }
     
     @Override

@@ -1,6 +1,7 @@
 package com.row666.game;
 
 import com.row666.game.display.Display;
+import com.row666.game.input.KeyManager;
 import com.row666.game.states.GameState;
 import com.row666.game.states.StateManager;
 
@@ -16,6 +17,8 @@ public class Game {
     private int width, height;
     
     private GameState gameState;
+
+    private KeyManager keyManager;
     
     private BufferStrategy bs;
     private Graphics g;
@@ -23,6 +26,7 @@ public class Game {
         this.title = title;
         this.width = width;
         this.height = height;
+        keyManager = new KeyManager();
     }
     
     private void render() {
@@ -45,11 +49,17 @@ public class Game {
     }
     
     private void tick() {
+        keyManager.tick();
+        if (StateManager.getState() != null) {
+            StateManager.getState().tick();
+        }
+
     }
     
     private void init() {
         display = new Display(title, width, height);
-        
+
+        display.getJFrame().addKeyListener(keyManager);
         gameState = new GameState(this);
         StateManager.setState(gameState);
     }
@@ -78,17 +88,19 @@ public class Game {
             tDelta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
-        
-            if(fDelta >= 1){
-                render();
-                frames++;
-                fDelta--;
-            }
+
             if(tDelta >= 1){
                 tick();
                 ticks++;
                 tDelta--;
             }
+
+            if(fDelta >= 1){
+                render();
+                frames++;
+                fDelta--;
+            }
+
         
             if(timer >= 1000000000){
                 System.out.println("Ticks and Frames: " + ticks + ", " + frames);
@@ -115,5 +127,9 @@ public class Game {
     
     public int getHeight() {
         return height;
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
 }

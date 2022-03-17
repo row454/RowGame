@@ -1,12 +1,10 @@
 package com.row666.game.tiles;
 
 import com.row666.game.gfx.Assets;
-import com.row666.game.room.Room;
-import com.row666.game.states.GameState;
+import com.row666.game.floor.room.Room;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class TileManager {
     
@@ -14,7 +12,7 @@ public class TileManager {
     
     private static Tile[] tiles = new Tile[256];
     private static final Tile floorTile = new Tile(assets.getTiles().get(0), 1);
-    private static final Tile wallTile = new ConnectingTile(assets.getTiles().subList(1, 6).toArray(new BufferedImage[0]), 0);
+    private static final Tile wallTile = new ConnectingTile(assets.getTiles().subList(1, 6).toArray(new BufferedImage[0]), 0, true);
     
     private boolean initiated = false;
     private Tile[][] tileMap;
