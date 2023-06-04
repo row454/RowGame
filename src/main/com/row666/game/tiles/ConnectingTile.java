@@ -11,12 +11,27 @@ public class ConnectingTile extends Tile {
     
     /**
      *  @param textures
-     *      Accepts an array of 5 elements with each image being as follows:
-     *      1st has no edges,
-     *      2nd has vertical edges,
-     *      3rd has horizontal edges,
-     *      4th has corners,
-     *      and the 5th has all edges.
+     *      Accepts an array of 5 elements with each image being as follows (1 = same tile, 0 = different tile, x = any tile):
+     *      1st has no edges:
+     *      x1x
+     *      111
+     *      x1x
+     *      2nd has vertical edges:
+     *      x1x
+     *      010
+     *      x1x
+     *      3rd has horizontal edges:
+     *      x0x
+     *      111
+     *      x0x
+     *      4th has corners:
+     *      101
+     *      010
+     *      101
+     *      and the 5th has all edges:
+     *      000
+     *      010
+     *      000
      *
      */
     public ConnectingTile(BufferedImage[] textures, int id) {
